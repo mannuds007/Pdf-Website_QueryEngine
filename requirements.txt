@@ -1,0 +1,10 @@
+pypdf
+sentence_transformers
+llama_index
+pinecone-client langchain
+accelerate
+bitsandbytes
+llama-index-llms-huggingface
+llama-index-embeddings-langchain
+llama-index-settings
+huggingface
