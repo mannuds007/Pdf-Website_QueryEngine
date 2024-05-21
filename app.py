@@ -1,4 +1,3 @@
-%%writefile app.py
 import streamlit as st
 import os
 os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
@@ -58,13 +57,13 @@ def main():
     if uploaded_files:
         documents = process_documents(uploaded_files)
         st.write("Files uploaded successfully!")
-        embed_model, llm = setup_models()  # Setup models only after upload
+        embed_model, llm = setup_models()
         index = VectorStoreIndex.from_documents(documents, embed_model=embed_model)
         query_engine = index.as_query_engine(llm=llm)
         user_input = st.text_input("Enter your question:")
         if user_input:
             response = query_engine.query(user_input)
-            st.write(str(response))
+            st.text_area("Answer", value=str(response), height=300)
     if torch.cuda.is_available():
         st.write(f"Total GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9} GB")
         st.write(f"Current Memory Allocated: {torch.cuda.memory_allocated() / 1e6} MB")
